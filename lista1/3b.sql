@@ -5,10 +5,6 @@ DELETE
 FROM Registro_Saque;
 
 
-DELETE
-FROM Registro_Deposito;
-
-
 INSERT INTO Registro_Saque (cod_saque, cod_conta, dt_saque, valor_saque)
 VALUES (1,
         1,
