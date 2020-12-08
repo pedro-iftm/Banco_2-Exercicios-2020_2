@@ -1,5 +1,9 @@
 use MePoupe;
 
+/* update conta_corrente set saldo=500 where cod_conta = 2; */
+/* drop table td_red_clients; */
+drop trigger td_red_clients;
+
 create table td_red_clients(
     id int not null auto_increment,
     cod_cliente int not null,
@@ -29,8 +33,8 @@ begin
                       from td_red_clients t
                       where t.cod_conta = new.cod_conta
                       and t.dt_verde is null) then
-            insert into td_red_clients (id, cod_cliente, nome, CPF, cod_conta)
-            select null, c.cod_cliente, c.nome, c.CPF, cc.cod_conta
+            insert into td_red_clients (id, cod_cliente, nome, CPF, cod_conta, dt_vermelho)
+            select null, c.cod_cliente, c.nome, c.CPF, cc.cod_conta, now()
             from cliente c
             inner join conta_corrente cc on c.cod_cliente = cc.cod_cliente
             where cc.cod_conta = new.cod_conta;
